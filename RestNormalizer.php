@@ -327,9 +327,9 @@ class RestNormalizer
     /*
      * Formatting data for logical values
      *
-     * @param $data double - Boolean value to formatting
+     * @param $data boolean - Boolean value to formatting
      * @param $validation array - The data for the current data type validation
-     * @return double
+     * @return boolean
      */
     final private function setBool($data, $validation)
     {
