@@ -197,7 +197,11 @@ class RestNormalizer
             foreach ($this->validation as $code => $valid) {
                 if (isset($valid['required']) && $valid['required'] === true && isset($formatted[ $code ]) === false) {
                     if ($this->logFile !== null) {
-                        error_log(sprintf("%s: NOT VALID(%s)\n", $this->formatMessage, json_encode($formatted)), 3, $this->logFile);
+                        error_log(
+                            sprintf("%s: NOT VALID(%s)\n", $this->formatMessage, json_encode($formatted)),
+                            3,
+                            $this->logFile
+                        );
                     } else {
                         echo sprintf("%s: NOT VALID(%s)\n", $this->formatMessage, json_encode($formatted));
                     }
