@@ -186,11 +186,6 @@ class RestNormalizer
                 }
 
                 if (isset($this->validation[ $code ]['required']) && $this->validation[ $code ]['required'] === true) {
-                    if ($this->logFile !== null) {
-                        error_log(sprintf("%s: NOT VALID(%s)\n", $this->formatMessage, json_encode($data)), 3, $this->logFile);
-                    } else {
-                        echo sprintf("%s: NOT VALID(%s)\n", $this->formatMessage, json_encode($data));
-                    }
                     $formatted = array();
                     break;
                 }
