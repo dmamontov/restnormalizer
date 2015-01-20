@@ -4,7 +4,7 @@ RestNormalizer 1.0.0
 Normalization data for the transmission via "Representational State Transfer".
 
 ## Requirements
-* PHP version **>=5.0**.
+* PHP version >5.0
 
 ## Data types and values to be formatted
 
