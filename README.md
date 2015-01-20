@@ -112,9 +112,9 @@ $n->logFile = 'valid.log';
 $n->setValidation('you-valid.json');
 
 $data = array(
-	"key1" => "value1",
-	"key2" => value2,
-	"key3" => "value3"
+	'key1' => 'value1',
+	'key2' => 'value2',
+	'key3' => 'value3'
 );
 $data = $n->normalize($data)
 ```
