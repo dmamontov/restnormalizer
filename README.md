@@ -1,7 +1,7 @@
 RestNormalizer 1.0.0
 ====================
 
-Normalization data for the transmission via "Representational State Transfer".
+Normalization data for the transmission via "Representational State Transfer". [More information](https://dmamontov.github.io/restnormalizer).
 
 ## Requirements
 * PHP version >5.0
