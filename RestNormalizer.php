@@ -47,48 +47,60 @@
  * @author    Dmitry Mamontov <d.slonyara@gmail.com>
  * @copyright 2015 Dmitry Mamontov <d.slonyara@gmail.com>
  * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @version   Release: @package_version@
- * @link      https://github.com/dmamontov/restnormalizer/blob/master/RestNormalizer.php
+ * @version   Release: 1.0.0
+ * @link      https://github.com/dmamontov/restnormalizer/
  * @since     Class available since Release 1.0.0
  */
 
 class RestNormalizer
 {
-    /*
+    /**
      * Encoding output values
+     * @var string
+     * @access public
      */
     public $encoding = 'UTF-8';
 
-    /*
+    /**
      * Cleanup of null values
+     * @var boolean
+     * @access public
      */
     public $clear = true;
 
-    /*
+    /**
      * The path to the file for logging
+     * @var string
+     * @access public
      */
     public $logFile;
 
-    /*
+    /**
      * Text format for logging
+     * @var string
+     * @access private
      */
     private $formatMessage = '';
 
-    /*
+    /**
      * Sorted file validation
+     * @var array
+     * @access private
      */
     private $validation = array();
 
-    /*
+    /**
      * File validation
+     * @var array
+     * @access private
      */
     private $originalValidation = array();
 
-    /*
+    /**
      * Class constructor
-     *
-     * Sets the timezone, unless it is established.
-     * Formats text for logging.
+     * @return void
+     * @access public
+     * @final
      */
     final public function __construct()
     {
@@ -99,10 +111,12 @@ class RestNormalizer
         $this->formatMessage = sprintf('[%s]', date('Y-m-d H:i:s'));
     }
 
-    /*
+    /**
      * Installation file validation
-     *
-     * @param $file string - The path to the file validation
+     * @param string $file The path to the file validation
+     * @return void
+     * @access public
+     * @final
      */
     final public function setValidation($file)
     {
@@ -113,11 +127,12 @@ class RestNormalizer
         }
     }
 
-    /*
+    /**
      * Parsing the file validation
-     *
-     * @param $file string - The path to the file validation
+     * @param string $file The path to the file validation
      * @return boolean
+     * @access private
+     * @final
      */
     final private function parseConfig($file)
     {
@@ -129,12 +144,13 @@ class RestNormalizer
         }
     }
 
-    /*
+    /**
      * Starting the process of normalization of the data
-     *
-     * @param $data array - The key is to sort the data validation
-     * @param $key string - Data normalization
+     * @param array $data The key is to sort the data validation
+     * @param string $key Data normalization
      * @return array
+     * @access public
+     * @final
      */
     final public function normalize($data, $key = false)
     {
@@ -152,22 +168,26 @@ class RestNormalizer
             throw new RuntimeException('Incorrect data array.');
         }
 
-        return $this->onPost($this->formatting($data));
+        return $this->onPostNormalize($this->formatting($data));
     }
 
-    /*
+    /**
      * Data formatting
-     *
-     * @param $data array - The key is to sort the data validation
-     * @param $skip boolean - Skip perform methods intended for the first run
+     * @param array $data The key is to sort the data validation
+     * @param boolean $skip Skip perform methods intended for the first run
      * @return array
+     * @access private
+     * @final
      */
     final private function formatting($data, $skip = false)
     {
         $formatted = array();
 
         if ($skip === false) {
-            $data = $this->onPre($data);
+            $tmpData = $this->onPreNormalize($data);
+            if (is_null($tmpData) === false) {
+                $data = $tmpData;
+            }
         }
 
         foreach ($data as $code => $value) {
@@ -214,12 +234,13 @@ class RestNormalizer
         return count($formatted) < 1 ? false : $formatted;
     }
 
-    /*
+    /**
      * Formatting data depending on the type
-     *
-     * @param $data mixed - The value to be formatted
-     * @param $validation array - The data for the current data type validation
+     * @param mixed $data The value to be formatted
+     * @param array $validation The data for the current data type validation
      * @return mixed
+     * @access private
+     * @final
      */
     final private function setFormat($data, $validation)
     {
@@ -249,12 +270,13 @@ class RestNormalizer
         return $format;
     }
 
-    /*
+    /**
      * Formatting data for strings
-     *
-     * @param $data string - String to formatting
-     * @param $validation array - The data for the current data type validation
+     * @param string $data String to formatting
+     * @param array $validation The data for the current data type validation
      * @return string
+     * @access private
+     * @final
      */
     final private function setString($data, $validation)
     {
@@ -275,12 +297,13 @@ class RestNormalizer
         return (string) $data;
     }
 
-    /*
+    /**
      * Formatting data for integers
-     *
-     * @param $data int - Integer to formatting
-     * @param $validation array - The data for the current data type validation
-     * @return int
+     * @param integer $data Integer to formatting
+     * @param array $validation The data for the current data type validation
+     * @return integer
+     * @access private
+     * @final
      */
     final private function setInt($data, $validation)
     {
@@ -297,12 +320,13 @@ class RestNormalizer
         return (int) $data;
     }
 
-    /*
+    /**
      * Formatting data for floating-point numbers
-     *
-     * @param $data double - Floating-point number to formatting
-     * @param $validation array - The data for the current data type validation
-     * @return double
+     * @param float $data Floating-point number to formatting
+     * @param array $validation The data for the current data type validation
+     * @return float
+     * @access private
+     * @final
      */
     final private function setDouble($data, $validation)
     {
@@ -323,12 +347,13 @@ class RestNormalizer
         return (double) $data;
     }
 
-    /*
+    /**
      * Formatting data for logical values
-     *
-     * @param $data boolean - Boolean value to formatting
-     * @param $validation array - The data for the current data type validation
+     * @param boolean $data Boolean value to formatting
+     * @param array $validation The data for the current data type validation
      * @return boolean
+     * @access private
+     * @final
      */
     final private function setBool($data, $validation)
     {
@@ -341,13 +366,14 @@ class RestNormalizer
         return (bool) $data;
     }
 
-    /*
+    /**
      * Formatting data for date and time
-     *
-     * @param $data mixed - Date and time of to formatting
-     * @param $validation array - The data for the current data type validation
-     * @param $skip boolean - Skip perform methods intended for the first run
+     * @param mixed $data Date and time of to formatting
+     * @param array $validation The data for the current data type validation
+     * @param boolean $skip Skip perform methods intended for the first run
      * @return mixed
+     * @access private
+     * @final
      */
     final private function setDateTime($data, $validation, $skip = false)
     {
@@ -370,12 +396,13 @@ class RestNormalizer
         return $data;
     }
 
-    /*
+    /**
      * Formatting data for enum
-     *
-     * @param $data mixed - Enum to formatting
-     * @param $validation array - The data for the current data type validation
-     * @return mixed
+     * @param string $data Enum to formatting
+     * @param array $validation The data for the current data type validation
+     * @return string
+     * @access private
+     * @final
      */
     final private function setEnum($data, $validation)
     {
@@ -393,11 +420,12 @@ class RestNormalizer
         return $data;
     }
 
-    /*
+    /**
      * Installing the specified encoding
-     *
-     * @param $data array - The original dataset
+     * @param array $data The original dataset
      * @return array
+     * @access private
+     * @final
      */
     final private function multiIconv($data)
     {
@@ -419,26 +447,26 @@ class RestNormalizer
         return $data;
     }
 
-    /*
+    /**
      * Preprocessing data
-     *
-     * @param $data array - The original dataset
+     * @param array $data
      * @return array
+     * @access protected
+     * @final
      */
-    public function onPre($data)
+    protected function onPreNormalize($data)
     {
-        return $data;
     }
 
-    /*
+    /**
      * Post-processing of data
-     *
-     * @param $data array - The original dataset
+     * @param array $data
      * @return array
+     * @access protected
+     * @final
      */
-    public function onPost($data)
+    protected function onPostNormalize($data)
     {
-        return $data;
     }
 }
 ?>
