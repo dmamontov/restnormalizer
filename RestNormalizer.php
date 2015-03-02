@@ -193,7 +193,7 @@ class RestNormalizer
         foreach ($data as $code => $value) {
 
             if (isset($this->validation[ $code ]) && $this->validation[ $code ]['type'] == 'skip') {
-                $formatted[$key] = $parameters;
+                $formatted[$code] = $value;
             }elseif (isset($this->validation[ $code ]) && is_array($value) === false) {
                 $formatted[ $code ] = $this->setFormat($value, $this->validation[ $code ]);
             } elseif (is_array($value)) {
