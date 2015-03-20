@@ -147,14 +147,14 @@
             "type": "double",
             "default": 0,
             "min": 0,
-            "decimals": 1
+            "decimals": 2
         },
         "discountPercent": {
             "type": "double",
             "default": 0,
             "max": 100,
             "min": 0,
-            "decimals": 1
+            "decimals": 2
         },
         "mark": {
             "type": "int",
@@ -282,13 +282,13 @@
             "type": "double",
             "default": 0,
             "min": 0,
-            "decimals": 1
+            "decimals": 2
         },
         "quantity": {
             "type": "double",
             "default": 1,
             "min": 1,
-            "decimals": 1
+            "decimals": 2
         },
         "properties": {
             "type": "skip"
@@ -297,7 +297,8 @@
             "type": "string"
         },
         "productName": {
-            "type": "string"
+            "type": "string",
+            "max": 250
         },
         "comment": {
             "type": "string"
@@ -306,7 +307,7 @@
             "type": "double",
             "default": 0,
             "min": 0,
-            "decimals": 1
+            "decimals": 2
         },
         "code": {
             "type": "string"
