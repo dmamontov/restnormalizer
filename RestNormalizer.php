@@ -168,7 +168,13 @@ class RestNormalizer
             throw new RuntimeException('Incorrect data array.');
         }
 
-        return $this->onPostNormalize($this->formatting($data));
+        $result = $this->formatting($data);
+        $postResult = $this->onPostNormalize($result)
+        if (is_null($postResult) == false) {
+            $result = $postResult;
+        }
+ 
+        return $result;
     }
 
     /**
