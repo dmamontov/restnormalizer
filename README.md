@@ -2,10 +2,20 @@
 [![License](https://poser.pugx.org/dmamontov/restnormalizer/license.svg)](https://packagist.org/packages/dmamontov/restnormalizer)
 [![Total Downloads](https://poser.pugx.org/dmamontov/restnormalizer/downloads)](https://packagist.org/packages/dmamontov/restnormalizer)
 
-RestNormalizer 1.0.0
-====================
+REST Normalizer
+===============
 
-Normalization data for the transmission via "Representational State Transfer". [More information](https://dmamontov.github.io/restnormalizer).
+This class can validate and filter parameters based on JSON rules.
+
+It can take a list of request parameters passed as an array or as a JSON string and validates it according to rules defined in an external files in the JSON format.
+
+The class can traverse the parameter data and check if the entries match the types and validation rules defined in the rules file for the specific type of request.
+
+Invalid values may be discard and logged to a given log file.
+
+The class may also call callback functions before and after the normalization process.
+
+[More information](https://dmamontov.github.io/restnormalizer).
 
 ## Requirements
 * PHP version >5.0
