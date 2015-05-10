@@ -191,10 +191,9 @@ class RestNormalizer
         }
 
         foreach ($data as $code => $value) {
-
             if (isset($this->validation[ $code ]) && $this->validation[ $code ]['type'] == 'skip') {
                 $formatted[$key] = $parameters;
-            }elseif (isset($this->validation[ $code ]) && is_array($value) === false) {
+            } elseif (isset($this->validation[ $code ]) && is_array($value) === false) {
                 $formatted[ $code ] = $this->setFormat($value, $this->validation[ $code ]);
             } elseif (is_array($value)) {
                 $formatted[ $code ] = $this->formatting($value, true);
@@ -210,7 +209,6 @@ class RestNormalizer
                     break;
                 }
             }
-
         }
 
         if ($skip === false) {
@@ -290,7 +288,7 @@ class RestNormalizer
         } elseif (isset($validation['min']) && mb_strlen($data) < $validation['min']) {
             $pad = isset($validation['pad']) && mb_strlen($validation['pad']) == 1 ? $validation['pad'] : ' ';
             $data .= str_repeat($pad, $validation['min'] - mb_strlen($data));
-        }elseif (isset($validation['max']) && mb_strlen($data) > $validation['max']) {
+        } elseif (isset($validation['max']) && mb_strlen($data) > $validation['max']) {
             $data = mb_substr($data, 0, $validation['max']);
         }
 
@@ -469,4 +467,3 @@ class RestNormalizer
     {
     }
 }
-?>

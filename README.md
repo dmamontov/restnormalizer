@@ -6,6 +6,22 @@ Normalization data for the transmission via "Representational State Transfer". [
 ## Requirements
 * PHP version >5.0
 
+## Installation
+
+1) Install [composer](https://getcomposer.org/download/)
+
+2) Follow in the project folder:
+```bash
+composer require dmamontov/restnormalizer ~1.0.0
+```
+
+In config `composer.json` your project will be added to the library `dmamontov/restnormalizer`, who settled in the folder `vendor/`. In the absence of a config file or folder with vendors they will be created.
+
+If before your project is not used `composer`, connect the startup file vendors. To do this, enter the code in the project:
+```php
+require 'path/to/vendor/autoload.php';
+```
+
 ## Data types and values to be formatted
 
 #### The data type "string"
