@@ -1,3 +1,7 @@
+[![Latest Stable Version](https://poser.pugx.org/dmamontov/restnormalizer/v/stable.svg)](https://packagist.org/packages/dmamontov/restnormalizer)
+[![License](https://poser.pugx.org/dmamontov/restnormalizer/license.svg)](https://packagist.org/packages/dmamontov/restnormalizer)
+[![Total Downloads](https://poser.pugx.org/dmamontov/restnormalizer/downloads)](https://packagist.org/packages/dmamontov/restnormalizer)
+
 RestNormalizer 1.0.0
 ====================
 
