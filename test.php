@@ -62,7 +62,7 @@ $customer = array(
         "city"  => "Moscow" //correctly
     ),
     "createdAt"  => '2015:01:02 03:00:11', //correctly
-    "contragentType" => "no-valid", //correctly
+    "contragentType" => "no-valid", //not correctly
     "certificateDate" => new DateTime() //correctly
 );
 
