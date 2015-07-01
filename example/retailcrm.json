@@ -129,9 +129,15 @@
         },
         "managerId": {
             "type": "int"
+        },
+        "source": {
+            "type": "skip"
         }
     },
     "orders": {
+        "shipmentStore": {
+            "type": "string"
+        },
         "number": {
             "type": "string"
         },
@@ -324,6 +330,12 @@
         "cost": {
             "type": "string"
         },
+        "netCost": {
+            "type": "string"
+        },
+        "deliveryTime": {
+            "type": "string"
+        },
         "date": {
             "type": "datetime",
             "format": "Y-m-d"
@@ -369,6 +381,9 @@
         },
         "text": {
             "type": "string"
+        },
+        "source": {
+            "type": "skip"
         }
     }
 }

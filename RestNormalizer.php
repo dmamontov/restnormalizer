@@ -38,7 +38,7 @@
  * @author    Dmitry Mamontov <d.slonyara@gmail.com>
  * @copyright 2015 Dmitry Mamontov <d.slonyara@gmail.com>
  * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since     File available since Release 1.0.0
+ * @since     File available since Release 1.0.1
  */
 
  /**
@@ -47,9 +47,9 @@
  * @author    Dmitry Mamontov <d.slonyara@gmail.com>
  * @copyright 2015 Dmitry Mamontov <d.slonyara@gmail.com>
  * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @version   Release: 1.0.0
+ * @version   Release: 1.0.1
  * @link      https://github.com/dmamontov/restnormalizer/
- * @since     Class available since Release 1.0.0
+ * @since     Class available since Release 1.0.1
  */
 
 class RestNormalizer
@@ -168,7 +168,10 @@ class RestNormalizer
             throw new RuntimeException('Incorrect data array.');
         }
 
-        return $this->onPostNormalize($this->formatting($data));
+        $formatting = $this->formatting($data);
+        $post = $this->onPostNormalize($formatting);
+
+        return is_null($post) ? $formatting : $post;
     }
 
     /**
@@ -192,14 +195,15 @@ class RestNormalizer
 
         foreach ($data as $code => $value) {
             if (isset($this->validation[ $code ]) && $this->validation[ $code ]['type'] == 'skip') {
-                $formatted[$key] = $parameters;
+                $formatted[ $code ] = $value;
+                continue;
             } elseif (isset($this->validation[ $code ]) && is_array($value) === false) {
                 $formatted[ $code ] = $this->setFormat($value, $this->validation[ $code ]);
             } elseif (is_array($value)) {
                 $formatted[ $code ] = $this->formatting($value, true);
             }
 
-            if ($formatted[ $code ] === null || $formatted[ $code ] == '' || count($formatted[ $code ]) < 1) {
+            if ($formatted[ $code ] === null || $formatted[ $code ] == '' || (is_array($formatted[ $code ]) && count($formatted[ $code ]) < 1)) {
                 if ($this->clear === true) {
                     unset($formatted[ $code ]);
                 }
