@@ -138,8 +138,8 @@ require 'path/to/vendor/autoload.php';
 ```php
 require_once 'RestNormalizer.php';
 $n = new RestNormalizer();
-$n->logFile = 'valid.log';
-$n->setValidation('you-valid.json');
+$n->setValidation('you-valid.json')
+  ->setLogFile('valid.log');
 
 $data = array(
 	'key1' => 'value1',
