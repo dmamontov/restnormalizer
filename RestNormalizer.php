@@ -38,7 +38,7 @@
  * @author    Dmitry Mamontov <d.slonyara@gmail.com>
  * @copyright 2015 Dmitry Mamontov <d.slonyara@gmail.com>
  * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since     File available since Release 1.0.1
+ * @since     File available since Release 1.0.2
  */
 
  /**
@@ -47,9 +47,9 @@
  * @author    Dmitry Mamontov <d.slonyara@gmail.com>
  * @copyright 2015 Dmitry Mamontov <d.slonyara@gmail.com>
  * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @version   Release: 1.0.1
+ * @version   Release: 1.0.2
  * @link      https://github.com/dmamontov/restnormalizer/
- * @since     Class available since Release 1.0.1
+ * @since     Class available since Release 1.0.2
  */
 
 class RestNormalizer
@@ -57,23 +57,23 @@ class RestNormalizer
     /**
      * Encoding output values
      * @var string
-     * @access public
+     * @access protected
      */
-    public $encoding = 'UTF-8';
+    protected $encoding = 'UTF-8';
 
     /**
      * Cleanup of null values
      * @var boolean
-     * @access public
+     * @access protected
      */
-    public $clear = true;
+    protected $clear = true;
 
     /**
      * The path to the file for logging
      * @var string
      * @access public
      */
-    public $logFile;
+    protected $logFile = '/tmp/normolizer-error.log';
 
     /**
      * Text format for logging
@@ -114,7 +114,7 @@ class RestNormalizer
     /**
      * Installation file validation
      * @param string $file The path to the file validation
-     * @return void
+     * @return RestNormalizer
      * @access public
      * @final
      */
@@ -125,6 +125,8 @@ class RestNormalizer
             || $this->parseConfig($file) === false) {
             throw new RuntimeException('Incorrect file validation.');
         }
+
+        return $this;
     }
 
     /**
@@ -203,7 +205,7 @@ class RestNormalizer
                 $formatted[ $code ] = $this->formatting($value, true);
             }
 
-            if ($formatted[ $code ] === null || $formatted[ $code ] == '' || (is_array($formatted[ $code ]) && count($formatted[ $code ]) < 1)) {
+            if (is_null($formatted[ $code ]) || $formatted[ $code ] === '' || (is_array($formatted[ $code ]) && count($formatted[ $code ]) < 1)) {
                 if ($this->clear === true) {
                     unset($formatted[ $code ]);
                 }
@@ -450,22 +452,83 @@ class RestNormalizer
     }
 
     /**
+     * @return string
+     * @access public
+     */
+    public function getEncoding()
+    {
+        return $this->encoding;
+    }
+
+    /**
+     * @param string $encoding
+     * @return RestNormalizer
+     * @access public
+     */
+    public function setEncoding($encoding)
+    {
+        $this->encoding = $encoding;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     * @access public
+     */
+    public function getClear()
+    {
+        return $this->clear;
+    }
+
+    /**
+     * @param boolean $clear
+     * @return RestNormalizer
+     * @access public
+     */
+    public function setClear($clear)
+    {
+        $this->clear = $clear;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     * @access public
+     */
+    public function getLogFile()
+    {
+        return $this->logFile;
+    }
+
+    /**
+     * @param string $logFile
+     * @return RestNormalizer
+     * @access public
+     */
+    public function setLogFile($logFile)
+    {
+        $this->logFile = $logFile;
+
+        return $this;
+    }
+
+    /**
      * Preprocessing data
      * @param array $data
      * @return array
      * @access protected
-     * @final
      */
     protected function onPreNormalize($data)
     {
     }
-
+    
     /**
      * Post-processing of data
      * @param array $data
      * @return array
      * @access protected
-     * @final
      */
     protected function onPostNormalize($data)
     {

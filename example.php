@@ -38,15 +38,15 @@
  * @author    Dmitry Mamontov <d.slonyara@gmail.com>
  * @copyright 2015 Dmitry Mamontov <d.slonyara@gmail.com>
  * @license   http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
- * @since     File available since Release 1.0.1
+ * @since     File available since Release 1.0.2
  */
 
 // EXAMPLE FOR RETAILCRM
 require_once 'RestNormalizer.php';
 
 $n = new RestNormalizer();
-//$n->logFile = 'valid.log';
-$n->setValidation('./example/retailcrm.json');
+$n->setValidation('./example/retailcrm.json')
+  ->setLogFile('valid.log');
 
 $customer = array(
     "externalId" => 1023, //correctly
